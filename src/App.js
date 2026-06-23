@@ -14,6 +14,7 @@ import PediatricReferral from './screens/PediatricReferral';
 import Dashboard         from './screens/Dashboard';
 import RecursosSalud     from './screens/RecursosSalud';
 import RecursosHub       from './screens/RecursosHub';
+import PSDashboard       from './screens/PSDashboard';
 
 const NO_NAV = ['/', '/hcp/login', '/acs/login'];
 
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/severe-referral"    element={<SevereReferral />} />
           <Route path="/pediatric-referral" element={<PediatricReferral />} />
           <Route path="/dashboard"          element={<Dashboard />} />
+          <Route path="/ps/dashboard"        element={<PSDashboard />} />
           <Route path="/recursos/salud"     element={<RecursosSalud />} />
           <Route path="/recursos/hub"       element={<RecursosHub />} />
           <Route path="*"                   element={<Navigate to="/" replace />} />

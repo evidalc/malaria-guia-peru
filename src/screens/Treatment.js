@@ -86,11 +86,11 @@ export default function Treatment() {
           <>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
               <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                {isACS ? 'Esquema de medicamento' : 'Esquema de tratamiento'}
+                {isACS ? 'Medicamento a dar' : 'Esquema de tratamiento'}
               </p>
               {cards.length > 1 && <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>Desliza para ver {cards.length} opciones →</p>}
             </div>
-            <TreatmentCarousel cards={cards} role={role} />
+            <TreatmentCarousel cards={cards} role={role} onRegister={() => navigate(isACS ? '/acs/home' : '/hcp/home')} />
           </>
         ) : (
           <Alert type="error">No se pudo generar esquema. Verifique los datos del formulario.</Alert>
@@ -112,7 +112,6 @@ export default function Treatment() {
         </Card>
 
 
-        <Btn onClick={() => navigate(isACS ? '/acs/home' : '/hcp/home')}>← Nueva visita</Btn>
       </Screen>
     </>
   );

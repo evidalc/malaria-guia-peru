@@ -85,6 +85,41 @@ export const CLEARANCE_NOT_DONE_ACS = [
   'Otro',
 ];
 
+// ─── Episode status options ──────────────────────────────────────────────────
+export const EPISODE_STATUS_FOLLOWUP = [
+  { value: 'continuar',  label: 'Continuar seguimiento' },
+  { value: 'referido',   label: 'Referido' },
+];
+export const EPISODE_STATUS_VERIFICATION = [
+  { value: 'alta',       label: 'Alta' },
+  { value: 'continuar',  label: 'Continuar seguimiento' },
+  { value: 'perdido',    label: 'Perdido' },
+  { value: 'referido',   label: 'Referido' },
+  { value: 'fallecido',  label: 'Fallecido' },
+];
+
+// ─── Adherence options ──────────────────────────────────────────────────────
+export const ADHERENCE_OPTIONS = [
+  { value: 'completo',     label: 'Sí, completó todo' },
+  { value: 'incompleto',   label: 'No, no completó' },
+  { value: 'no_sabe',      label: 'No sabe / no recuerda' },
+];
+export const ADHERENCE_INCOMPLETE_REASONS = [
+  'Olvidó dosis',
+  'Efectos adversos',
+  'Otro',
+];
+export const ADHERENCE_OPTIONS_ACS = [
+  { value: 'completo',   label: 'Sí, tomó todas las pastillas' },
+  { value: 'incompleto', label: 'No, no terminó de tomarlas' },
+  { value: 'no_sabe',    label: 'No sabe' },
+];
+export const ADHERENCE_INCOMPLETE_REASONS_ACS = [
+  'Se le olvidó',
+  'Le cayó mal (efectos adversos)',
+  'Otro motivo',
+];
+
 // ─── Hb instrument selector ──────────────────────────────────────────────────
 export const HB_INSTRUMENTS = [
   { value: 'sd_biosensor', label: 'SD Biosensor G6PD/Hb' },

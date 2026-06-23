@@ -9,13 +9,13 @@ export default function ACSHome() {
 
   return (
     <>
-      <TopBar title="MalariaGuía Perú" badge="ACS" />
+      <TopBar title="MalariaGuía Perú" badge="PS" />
       <Screen>
         {/* Greeting */}
         <div style={{ background: 'linear-gradient(135deg, var(--dark-green), var(--green))', borderRadius: 16, color: '#fff', padding: '18px 16px', display: 'flex', alignItems: 'center', gap: 14 }}>
           <div style={{ fontSize: 38 }}>🏘️</div>
           <div>
-            <p style={{ fontSize: 13, opacity: 0.8 }}>¡Hola, Agente!</p>
+            <p style={{ fontSize: 13, opacity: 0.8 }}>¡Hola, Promotor!</p>
             <p style={{ fontSize: 17, fontWeight: 700 }}>DNI: {dni}</p>
             <p style={{ fontSize: 12, opacity: 0.75, marginTop: 2 }}>IPRESS de referencia: {ipress}</p>
           </div>
@@ -26,7 +26,18 @@ export default function ACSHome() {
           style={{ background: 'var(--green)', border: 'none', borderRadius: 18, boxShadow: '0 4px 16px rgba(29,158,117,.35)', color: '#fff', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, padding: '26px 20px', width: '100%' }}>
           <span style={{ fontSize: 48 }}>📋</span>
           <span style={{ fontSize: 22, fontWeight: 700 }}>Nueva visita</span>
-          <span style={{ fontSize: 14, opacity: 0.85 }}>Registrar paciente con fiebre</span>
+          <span style={{ fontSize: 14, opacity: 0.85 }}>Registrar paciente</span>
+        </button>
+
+        {/* Dashboard */}
+        <button onClick={() => navigate('/ps/dashboard')}
+          style={{ background: '#fff', border: '1.5px solid var(--gray-mid)', borderRadius: 14, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, padding: '16px 18px', width: '100%', textAlign: 'left' }}>
+          <span style={{ fontSize: 28 }}>📊</span>
+          <span>
+            <span style={{ display: 'block', fontSize: 16, fontWeight: 700, color: 'var(--dark-green)' }}>Mi resumen</span>
+            <span style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>Pacientes · visitas · estado</span>
+          </span>
+          <span style={{ marginLeft: 'auto', color: 'var(--green)', fontSize: 18, fontWeight: 700 }}>›</span>
         </button>
 
         {/* Sync status */}

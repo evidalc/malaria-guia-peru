@@ -30,7 +30,7 @@ export default function HCPHome() {
           <span style={{ fontSize: 42 }}>📋</span>
           <span>
             <span style={{ display: 'block', fontSize: 20, fontWeight: 700 }}>Nueva visita</span>
-            <span style={{ display: 'block', fontSize: 13, opacity: 0.85, marginTop: 2 }}>Visita inicial · seguimiento · verificación</span>
+            <span style={{ display: 'block', fontSize: 13, opacity: 0.85, marginTop: 2 }}>Visita inicial · Seguimiento · Verificación</span>
           </span>
         </button>
 

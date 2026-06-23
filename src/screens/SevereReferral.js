@@ -40,10 +40,10 @@ export default function SevereReferral() {
             <Card>
               <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--dark-green)', marginBottom: 14 }}>¿Qué hacer AHORA?</p>
               {[
-                { n: '1', icon: '📞', text: 'Llama al establecimiento de salud de inmediato' },
+                { n: '1', icon: '📞', text: 'Llama a tu establecimiento de salud de inmediato' },
                 { n: '2', icon: '🗣️', text: 'Diles que tienes un paciente con malaria grave' },
                 { n: '3', icon: '🚫', text: 'NO le des pastillas por la boca si vomita o está inconsciente' },
-                { n: '4', icon: '🚗', text: 'Consigue un carro, moto o bote para llevarlo YA' },
+                { n: '4', icon: '🚑', text: 'Traslada al paciente inmediatamente' },
                 { n: '5', icon: '👥', text: 'Acompáñalo o manda a un familiar de confianza' },
               ].map(s => (
                 <div key={s.n} style={{ alignItems: 'flex-start', display: 'flex', gap: 12, marginBottom: 16, paddingBottom: 14, borderBottom: '1px solid var(--gray-light)' }}>
@@ -58,7 +58,7 @@ export default function SevereReferral() {
 
             <button style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, background: 'var(--blue)', border: 'none', borderRadius: 14, color: '#fff', cursor: 'pointer', fontSize: 17, fontWeight: 700, padding: '16px 20px', width: '100%' }}>
               <span style={{ fontSize: 24 }}>📞</span>
-              Llamar al establecimiento de ser posible
+              Llamar al establecimiento
             </button>
           </>
         ) : (

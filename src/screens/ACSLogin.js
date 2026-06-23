@@ -27,11 +27,11 @@ export default function ACSLogin() {
 
   return (
     <>
-      <TopBar title="Acceso — Agente Comunitario" back="/" badge="ACS" />
+      <TopBar title="Acceso — Promotor de Salud" back="/" badge="PS" />
       <Screen>
         <div style={{ textAlign: 'center', padding: '10px 0 2px' }}>
           <div style={{ fontSize: 44 }}>🏘️</div>
-          <h2 style={{ fontSize: 19, fontWeight: 700, color: 'var(--dark-green)', marginTop: 6 }}>Agente de Salud Comunitario</h2>
+          <h2 style={{ fontSize: 19, fontWeight: 700, color: 'var(--dark-green)', marginTop: 6 }}>Promotor de Salud</h2>
           <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>Tu DNI + código de tu establecimiento de referencia</p>
         </div>
 

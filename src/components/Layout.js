@@ -98,7 +98,7 @@ export function Divider() {
 
 // ─── Persistent bottom navigation bar ────────────────────────────────────────
 const NAV_ITEMS = [
-  { icon: '+', label: 'NTS Malaria',      action: () => window.open('/NTS233.pdf', '_blank') },
+  { icon: '+', label: 'NTS Malaria',      action: () => window.open('/NTS-233-2025.pdf', '_blank') },
   { icon: '♥', label: 'Recomendaciones', route: '/recursos/salud' },
   { icon: '★', label: 'Recursos',        route: '/recursos/hub' },
 ];

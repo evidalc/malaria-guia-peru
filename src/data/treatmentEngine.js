@@ -22,7 +22,7 @@ export function generateCards(intake) {
 
   if (species === 'vivax')      return { type: 'cards', cards: vivaxCards({ w, am, pregnant, lactating, g6pdStatus, tqAvailable, role }) };
   if (species === 'falciparum') return { type: 'cards', cards: falciparumCards({ w, am, pregnant, role }) };
-  if (species === 'malariae')   return { type: 'cards', cards: malariaeCards({ w, role }) };
+  if (species === 'malariae')   return { type: 'cards', cards: malariaeCards({ w, role, pregnant }) };
   if (species === 'ovale')      return { type: 'cards', cards: ovaleCards({ w, am, pregnant, lactating, g6pdStatus, role }) };
   if (species === 'mixed')      return { type: 'cards', cards: mixedCards({ w, g6pdStatus, pregnant, role }) };
   return null;
@@ -86,7 +86,7 @@ function tqDrug(w, am, role) {
     totalMgLabel: role === 'hcp' ? `${dose.mg} mg dosis única` : null,
     pillCountLabel: dose.tabsStr,
     formulation: dose.form,
-    ntsRef: null,
+    ntsRef: 'Tabla 2a',
     ahaWarning: true,
     tqConsideraciones: true,
   };
@@ -149,21 +149,21 @@ function vivaxCards({ w, am, pregnant, lactating, g6pdStatus, tqAvailable, role 
         lineBadge: '1ra Línea',
         title: 'CQ semanal profiláctico',
         subtitle: 'Gestante · sin primaquina durante gestación',
-        drugs: [{ name: 'Cloroquina profiláctica', dotColor: 'cloroquina', daysLabel: '1 vez/semana hasta el parto', mgKgLabel: '5 mg/kg/semana', totalMgLabel: role === 'hcp' ? `${Math.round(5 * w)} mg/semana` : null, pillCountLabel: `${formatTabs(Math.round(5 * w / 150 * 4) / 4)} de CQ 150mg/semana`, formulation: 'CQ 150mg base/comp.', ntsRef: null, ahaWarning: false }],
+        drugs: [{ name: 'Cloroquina profiláctica', dotColor: 'cloroquina', daysLabel: '1 vez/semana hasta el parto', mgKgLabel: '5 mg/kg/semana', totalMgLabel: role === 'hcp' ? `${Math.round(5 * w)} mg/semana` : null, pillCountLabel: `${formatTabs(Math.round(5 * w / 150 * 4) / 4)} de CQ 150mg/semana`, formulation: 'CQ 150mg base/comp.', ntsRef: 'Tabla 3', ahaWarning: false }],
         warnings: [{ type: 'error', text: 'Primaquina CONTRAINDICADA durante la gestación. No administrar.' }],
-        ntsRef: null,
+        ntsRef: 'Tabla 3',
       },
       {
         id: 'pv-preg-2',
         lineBadge: 'Postparto',
         title: 'PQ radical — postparto',
         subtitle: '≥ 1 mes después del parto · verificar G6PD antes',
-        drugs: [{ name: 'Primaquina (cura radical postparto)', dotColor: 'primaquinaDiaria', daysLabel: 'D1–D7 (iniciar ≥1 mes postparto)', mgKgLabel: '0.5 mg/kg/día × 7 días', totalMgLabel: null, pillCountLabel: 'Calcular por peso al inicio del tratamiento', formulation: 'PQ 15mg/comp.', ntsRef: null, ahaWarning: true }],
+        drugs: [{ name: 'Primaquina (cura radical postparto)', dotColor: 'primaquinaDiaria', daysLabel: 'D1–D7 (iniciar ≥1 mes postparto)', mgKgLabel: '0.5 mg/kg/día × 7 días', totalMgLabel: null, pillCountLabel: 'Calcular por peso al inicio del tratamiento', formulation: 'PQ 15mg/comp.', ntsRef: 'Tabla 3', ahaWarning: true }],
         warnings: [
           { type: 'info', text: 'Verificar G6PD antes de iniciar primaquina postparto.' },
           ...(lactating ? [{ type: 'warning', text: 'Si lactando: no iniciar PQ en el primer mes postparto.' }] : []),
         ],
-        ntsRef: null,
+        ntsRef: 'Tabla 3',
       },
     ];
   }
@@ -196,7 +196,7 @@ function vivaxCards({ w, am, pregnant, lactating, g6pdStatus, tqAvailable, role 
     if (showTQ) {
       const tq = tqDrug(w, am, role);
       return [
-        { id: 'pv-n-tq', lineBadge: '1ra Línea', title: 'CQ + Tafenoquina', subtitle: 'G6PD normal · TQ disponible', drugs: [cq, tq], warnings: [{ type: 'info', text: 'Tafenoquina disponible. Verificar ausencia de contraindicaciones (ver ⚠️).' }], ntsRef: null },
+        { id: 'pv-n-tq', lineBadge: '1ra Línea', title: 'CQ + Tafenoquina', subtitle: 'G6PD normal · TQ disponible', drugs: [cq, tq], warnings: [{ type: 'info', text: 'Tafenoquina disponible. Verificar ausencia de contraindicaciones (ver ⚠️).' }], ntsRef: 'Tabla 2a' },
         { id: 'pv-n-pq', lineBadge: '2da Línea', title: 'CQ + PQ diario', subtitle: 'G6PD normal · alternativa sin TQ', drugs: [cq, pqD], warnings: [], ntsRef: 'Tabla 5' },
         cqResistant1st('daily'),
       ];
@@ -237,7 +237,7 @@ function falciparumCards({ w, am, pregnant, role }) {
         { type: 'error', text: 'Mefloquina CONTRAINDICADA en primer trimestre. Artesunato puede usarse bajo supervisión médica estricta.' },
         { type: 'info', text: 'Referir a médico para manejo especializado de Pf en embarazo.' },
       ],
-      ntsRef: null,
+      ntsRef: 'Tabla 12',
     }];
   }
 
@@ -278,17 +278,28 @@ function falciparumCards({ w, am, pregnant, role }) {
 }
 
 // ─── P. malariae ──────────────────────────────────────────────────────────────
-function malariaeCards({ w, role }) {
+function malariaeCards({ w, role, pregnant }) {
   const mg = cqMgFromWeight(w);
+  const cqOnly = { name: 'Cloroquina', dotColor: 'cloroquina', daysLabel: 'D1, D2, D3', mgKgLabel: '10/10/5 mg/kg', totalMgLabel: role === 'hcp' ? `${mg.d1}/${mg.d2}/${mg.d3} mg` : null, pillCountLabel: (() => { const vx = lookupVivax(w); return vx ? `D1–D2: ${formatTabs(vx.cqD1)} · D3: ${formatTabs(vx.cqD3)}` : '—'; })(), formulation: 'CQ 150mg base/comp.', ntsRef: 'Tabla 5', ahaWarning: false };
+
+  if (pregnant) {
+    return [{
+      id: 'pm-preg',
+      lineBadge: 'Gestante',
+      title: 'CQ × 3 días (sin primaquina)',
+      subtitle: 'P. malariae · Gestante · PQ contraindicada',
+      drugs: [cqOnly],
+      warnings: [{ type: 'error', text: 'Primaquina CONTRAINDICADA durante la gestación. Solo cloroquina.' }],
+      ntsRef: 'Tabla 6',
+    }];
+  }
+
   return [{
     id: 'pm-1',
     lineBadge: 'Línea Única',
     title: 'CQ × 3 días + PQ dosis única',
     subtitle: 'P. malariae · G6PD no requerido',
-    drugs: [
-      { name: 'Cloroquina', dotColor: 'cloroquina', daysLabel: 'D1, D2, D3', mgKgLabel: '10/10/5 mg/kg', totalMgLabel: role === 'hcp' ? `${mg.d1}/${mg.d2}/${mg.d3} mg` : null, pillCountLabel: (() => { const vx = lookupVivax(w); return vx ? `D1–D2: ${formatTabs(vx.cqD1)} · D3: ${formatTabs(vx.cqD3)}` : '—'; })(), formulation: 'CQ 150mg base/comp.', ntsRef: 'Tabla 5', ahaWarning: false },
-      pqSingleDrug(w, role),
-    ],
+    drugs: [cqOnly, pqSingleDrug(w, role)],
     warnings: [{ type: 'info', text: 'G6PD no requerido. PQ 0.25 mg/kg es segura incluso si G6PD deficiente.' }],
     ntsRef: null,
   }];
@@ -312,7 +323,7 @@ function ovaleCards({ w, am, pregnant, lactating, g6pdStatus, role }) {
 // ─── Mixed PfPv ───────────────────────────────────────────────────────────────
 function mixedCards({ w, g6pdStatus, pregnant, role }) {
   if (pregnant) {
-    return [{ id: 'mx-preg', lineBadge: 'Gestante', title: 'Consulta urgente con médico', subtitle: 'Mixta PfPv en gestante', drugs: [], warnings: [{ type: 'error', text: 'Gestante con infección mixta: referir a médico. Primaquina contraindicada. Manejo especializado.' }], ntsRef: null }];
+    return [{ id: 'mx-preg', lineBadge: 'Gestante', title: 'Consulta urgente con médico', subtitle: 'Mixta PfPv en gestante', drugs: [], warnings: [{ type: 'error', text: 'Gestante con infección mixta: referir a médico. Primaquina contraindicada. Manejo especializado.' }], ntsRef: 'Tabla 3 + 12' }];
   }
 
   const pqD = pqDailyDrug(w, role);

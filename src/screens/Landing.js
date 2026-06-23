@@ -46,7 +46,7 @@ export default function Landing() {
         <button onClick={() => navigate('/acs/login')} style={{ background: 'rgba(255,255,255,0.13)', border: '2px solid rgba(255,255,255,0.35)', borderRadius: 16, cursor: 'pointer', padding: '18px 18px', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 14 }}>
           <span style={{ fontSize: 34 }}>🏘️</span>
           <span style={{ flex: 1 }}>
-            <span style={{ display: 'block', fontSize: 16, fontWeight: 700, color: '#fff' }}>Agente Comunitario de Salud</span>
+            <span style={{ display: 'block', fontSize: 16, fontWeight: 700, color: '#fff' }}>Promotor de Salud</span>
             <span style={{ display: 'block', fontSize: 12, color: 'rgba(255,255,255,0.72)', marginTop: 2 }}></span>
           </span>
           <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 20, fontWeight: 700 }}>›</span>

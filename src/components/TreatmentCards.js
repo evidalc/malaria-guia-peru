@@ -107,7 +107,7 @@ function TreatmentCard({ card, role, onMark, marked }) {
 }
 
 // ─── Swipeable card carousel ──────────────────────────────────────────────────
-export function TreatmentCarousel({ cards, role }) {
+export function TreatmentCarousel({ cards, role, onRegister }) {
   const [idx, setIdx] = useState(0);
   const [marked, setMarked] = useState({});
 
@@ -123,7 +123,6 @@ export function TreatmentCarousel({ cards, role }) {
       {total > 1 && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 12, gap: 10 }}>
           <button onClick={() => setIdx(i => Math.max(0, i - 1))} disabled={idx === 0} style={{ background: 'var(--gray-light)', border: 'none', borderRadius: 10, color: 'var(--text)', cursor: idx === 0 ? 'default' : 'pointer', fontSize: 13, fontWeight: 600, opacity: idx === 0 ? 0.35 : 1, padding: '9px 16px' }}>‹ Anterior</button>
-          {/* Dots */}
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
             {cards.map((_, i) => <div key={i} onClick={() => setIdx(i)} style={{ background: i === idx ? 'var(--dark-green)' : 'var(--gray-mid)', borderRadius: '50%', cursor: 'pointer', height: i === idx ? 10 : 7, width: i === idx ? 10 : 7, transition: 'all .2s' }} />)}
           </div>
@@ -131,18 +130,32 @@ export function TreatmentCarousel({ cards, role }) {
         </div>
       )}
 
-      {/* Mandatory tick warning */}
+      {/* Register button — enabled only after ticking a treatment */}
       {!anyMarked && (
-        <p style={{ fontSize: 12, color: 'var(--red)', textAlign: 'center', marginTop: 8, fontWeight: 500 }}>
-          ⚠️ Debe marcar el tratamiento administrado para cerrar el encuentro
+        <p style={{ fontSize: 12, color: 'var(--red)', textAlign: 'center', marginTop: 12, fontWeight: 500 }}>
+          ⚠️ Marque el tratamiento administrado antes de registrar la visita
         </p>
       )}
-
-      {anyMarked && (
-        <p style={{ fontSize: 12, color: 'var(--green)', textAlign: 'center', marginTop: 8, fontWeight: 600 }}>
-          ✓ Tratamiento registrado. Puede cerrar el encuentro.
-        </p>
-      )}
+      <button
+        onClick={anyMarked ? onRegister : undefined}
+        disabled={!anyMarked}
+        style={{
+          marginTop: 10,
+          width: '100%',
+          padding: '16px',
+          borderRadius: 14,
+          border: 'none',
+          fontSize: 16,
+          fontWeight: 700,
+          cursor: anyMarked ? 'pointer' : 'not-allowed',
+          background: anyMarked ? 'var(--dark-green)' : 'var(--gray-light)',
+          color: anyMarked ? '#fff' : 'var(--text-muted)',
+          transition: 'background .2s, color .2s',
+          boxShadow: anyMarked ? '0 4px 14px rgba(29,158,117,.35)' : 'none',
+        }}
+      >
+        {anyMarked ? '✅ Registrar visita' : 'Registrar visita'}
+      </button>
     </div>
   );
 }
